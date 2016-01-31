@@ -1,0 +1,15 @@
+{
+  "name": "superdemonicdancematclient",
+  "version": "1.0.0",
+  "description": "A client/server application to use an intel edison to simulate a dance pad",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dan Amador",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "kbm-robot": "0.0.4"
+  }
+}

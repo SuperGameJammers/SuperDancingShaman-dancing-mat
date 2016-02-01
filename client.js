@@ -7,7 +7,6 @@ var http = require('http').Server(app);
 var ip = process.argv[2] || "127.0.0.1";
 var port = process.argv[3] || "8080";
 
-//var socket = io.connect(formatAddress(ip, port));
 var io = require('socket.io-client'),
     socket = io(formatAddress(ip, port));
 function formatAddress(ip, port) {
@@ -16,16 +15,13 @@ function formatAddress(ip, port) {
     return address;
 }
 
-socket.on('connection', function (data) {
-    console.log(data);
-});
-
-socket.on('chat message', function(msg) {
-    console.log('message: ' + msg.value);
-});
-
 socket.on('time', function (data) {
     console.log(data);
 });
 
+setInterval(blinkLed, 2 * 1000);
+function  blinkLed(){
+    console.log("client blinked");
+    socket.emit('led');
+};
 //robot.startJar();

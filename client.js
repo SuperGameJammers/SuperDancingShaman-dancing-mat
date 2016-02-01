@@ -4,21 +4,28 @@ var app = require('express')();
 var http = require('http').Server(app);
 
 
-
-var ip = process.argv[2] || "localhost";
-var port = process.argv[3] || "8654";
+var ip = process.argv[2] || "127.0.0.1";
+var port = process.argv[3] || "8080";
 
 //var socket = io.connect(formatAddress(ip, port));
 var io = require('socket.io-client'),
-    socket = io.connect(formatAddress(ip,port));
+    socket = io(formatAddress(ip, port));
 function formatAddress(ip, port) {
-    return util.format('https://%s:%s/', ip, port);
+    var address = util.format('http://%s:%s', ip, port);
+    console.log(address);
+    return address;
 }
 
 socket.on('connection', function (data) {
-   console.log("FUCK");
+    console.log(data);
 });
-socket.on('time', function(data) {
-console.log(data);
+
+socket.on('chat message', function(msg) {
+    console.log('message: ' + msg.value);
 });
+
+socket.on('time', function (data) {
+    console.log(data);
+});
+
 //robot.startJar();

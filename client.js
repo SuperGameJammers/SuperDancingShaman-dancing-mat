@@ -1,16 +1,11 @@
-var util = require('util')
-var robot = require("kbm-robot");
-var app = require('express')();
-var http = require('http').Server(app);
-
-
-var ip = process.argv[2] || "127.0.0.1";
-var port = process.argv[3] || "8080";
-
-var io = require('socket.io-client'),
+var util = require('util'),
+    robot = require("kbm-robot"),
+    app = require('express')(),
+    http = require('http').Server(app),
+    ip = process.argv[2] || "127.0.0.1",
+    port = process.argv[3] || "8080",
+    io = require('socket.io-client'),
     socket = io(formatAddress(ip, port));
-robot.startJar();
-io.emit('connection');
 
 
 function formatAddress(ip, port) {
@@ -18,6 +13,7 @@ function formatAddress(ip, port) {
     console.log(address);
     return address;
 }
+
 socket.on('input', function (data) {
     switch (data) {
         case 0:
@@ -35,3 +31,6 @@ socket.on('input', function (data) {
     }
 });
 
+
+robot.startJar();
+io.emit('connection');

@@ -14,7 +14,6 @@
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
-.idea/workspace.xml
 
 # Gradle:
 .idea/gradle.xml
@@ -76,3 +75,4 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+.DS_Store

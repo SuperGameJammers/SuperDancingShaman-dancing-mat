@@ -9,19 +9,29 @@ var port = process.argv[3] || "8080";
 
 var io = require('socket.io-client'),
     socket = io(formatAddress(ip, port));
+robot.startJar();
+io.emit('connection');
+
+
 function formatAddress(ip, port) {
     var address = util.format('http://%s:%s', ip, port);
     console.log(address);
     return address;
 }
-
-socket.on('time', function (data) {
-    console.log(data);
+socket.on('input', function (data) {
+    switch (data) {
+        case 0:
+            robot.press("DOWN");
+            break;
+        case 1:
+            robot.press("UP");
+            break;
+        case 2:
+            robot.press("RIGHT");
+            break;
+        case 3:
+            robot.press("LEFT");
+            break;
+    }
 });
 
-setInterval(blinkLed, 2 * 1000);
-function  blinkLed(){
-    console.log("client blinked");
-    socket.emit('led');
-};
-//robot.startJar();
